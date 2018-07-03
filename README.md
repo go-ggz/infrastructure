@@ -17,6 +17,7 @@ create `terraform.tfvars` and add the following setting:
 ```
 aws_access_key = "xxxx"
 aws_secret_key = "xxxx"
+aws_vpc_id     = "xxxx"
 ```
 
 ## Build Infrastructure
