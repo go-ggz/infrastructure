@@ -15,15 +15,11 @@ resource "aws_instance" "ggz" {
   }
 }
 
-resource "aws_eip" "ggz-ip" {
+resource "aws_eip" "ggz_ip" {
   instance = "${aws_instance.ggz.id}"
 
   tags {
     Name        = "ggz-api"
     Environment = "${var.environment}"
   }
-}
-
-output "ip" {
-  value = "${ aws_eip.ggz-ip.public_ip }"
 }
