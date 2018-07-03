@@ -2,9 +2,27 @@ data "aws_vpc" "selected" {
   id = "${var.aws_vpc_id}"
 }
 
-resource "aws_security_group" "ggz-api-sg" {
+resource "aws_security_group" "ggz_alb_sg" {
+  name        = "ggz alb sg"
+  description = "ggz load balancer security group"
+  vpc_id      = "${data.aws_vpc.selected.id}"
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags {
+    Name        = "ggz-api"
+    Environment = "${var.environment}"
+  }
+}
+
+resource "aws_security_group" "ggz_api_sg" {
   name        = "ggz api sg"
-  description = "ggz security group"
+  description = "ggz api service security group"
   vpc_id      = "${data.aws_vpc.selected.id}"
 
   egress {
@@ -27,7 +45,7 @@ resource "aws_security_group_rule" "allow_http" {
   protocol    = "tcp"
   cidr_blocks = ["0.0.0.0/0"]
 
-  security_group_id = "${aws_security_group.ggz-api-sg.id}"
+  security_group_id = "${aws_security_group.ggz_alb_sg.id}"
 }
 
 resource "aws_security_group_rule" "allow_https" {
@@ -37,7 +55,7 @@ resource "aws_security_group_rule" "allow_https" {
   protocol    = "tcp"
   cidr_blocks = ["0.0.0.0/0"]
 
-  security_group_id = "${aws_security_group.ggz-api-sg.id}"
+  security_group_id = "${aws_security_group.ggz_alb_sg.id}"
 }
 
 resource "aws_security_group_rule" "allow_ssh" {
@@ -47,5 +65,15 @@ resource "aws_security_group_rule" "allow_ssh" {
   protocol    = "tcp"
   cidr_blocks = ["0.0.0.0/0"]
 
-  security_group_id = "${aws_security_group.ggz-api-sg.id}"
+  security_group_id = "${aws_security_group.ggz_api_sg.id}"
+}
+
+resource "aws_security_group_rule" "allow_alb" {
+  type      = "ingress"
+  from_port = 0
+  to_port   = 65535
+  protocol  = "tcp"
+
+  security_group_id        = "${aws_security_group.ggz_api_sg.id}"
+  source_security_group_id = "${aws_security_group.ggz_alb_sg.id}"
 }

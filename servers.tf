@@ -7,7 +7,7 @@ provider "aws" {
 resource "aws_instance" "ggz" {
   ami                    = "${lookup(var.amis, var.aws_region)}"
   instance_type          = "t2.nano"
-  vpc_security_group_ids = ["${aws_security_group.ggz-api-sg.id}"]
+  vpc_security_group_ids = ["${aws_security_group.ggz_api_sg.id}"]
 
   tags {
     Name        = "ggz-api"
