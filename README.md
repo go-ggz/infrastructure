@@ -19,17 +19,20 @@ aws_access_key = "xxxx"
 aws_secret_key = "xxxx"
 ```
 
-## Initialization
+## Build Infrastructure
 
 ```sh
 $ terraform init
-Initializing the backend...
-Initializing provider plugins...
-- downloading plugin for provider "aws"...
 ```
 
-## Apply Changes
+## Change Infrastructure
 
 ```sh
 $ terraform apply
+```
+
+## Destroy Infrastructure
+
+```sh
+$ terraform destroy
 ```

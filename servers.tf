@@ -5,7 +5,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "ggz" {
-  ami           = "${lookup(var.AMIS, var.aws_region)}"
+  ami           = "${lookup(var.amis, var.aws_region)}"
   instance_type = "t2.nano"
 
   tags {

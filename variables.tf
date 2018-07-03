@@ -9,7 +9,7 @@ variable "environment" {
   default = "staging"
 }
 
-variable "AMIS" {
+variable "amis" {
   type = "map"
 
   #
