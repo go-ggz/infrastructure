@@ -25,6 +25,6 @@ variable "amis" {
   # http://www.ubuntu.com/cloud/services
   #
   default = {
-    ap-southeast-1 = "ami-e2314d08"
+    ap-southeast-1 = "ami-81cefcfd"
   }
 }
