@@ -1,13 +1,8 @@
-provider "aws" {
-  access_key = "${var.aws_access_key}"
-  secret_key = "${var.aws_secret_key}"
-  region     = "${var.aws_region}"
-}
-
 resource "aws_instance" "ggz" {
-  ami                    = "${lookup(var.amis, var.aws_region)}"
-  instance_type          = "t2.nano"
-  vpc_security_group_ids = ["${aws_security_group.ggz_api_sg.id}"]
+  ami             = "${lookup(var.amis, var.aws_region)}"
+  instance_type   = "t2.nano"
+  security_groups = ["${aws_security_group.ggz_api_sg.name}"]
+  key_name        = "${var.key_name}"
 
   tags {
     Name        = "ggz-api"
