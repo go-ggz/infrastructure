@@ -33,6 +33,11 @@ resource "aws_lb_target_group" "ggz_api" {
     path     = "/healthy"
     matcher  = "200-299"
   }
+
+  tags {
+    Name        = "ggz-api"
+    Environment = "${var.environment}"
+  }
 }
 
 resource "aws_lb_target_group_attachment" "ggz_api" {
