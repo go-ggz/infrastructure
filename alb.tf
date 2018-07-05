@@ -46,10 +46,23 @@ resource "aws_lb_target_group_attachment" "ggz_api" {
   port             = 80
 }
 
-resource "aws_lb_listener" "front_end" {
+resource "aws_lb_listener" "front_end_http" {
   load_balancer_arn = "${aws_lb.ggz_api.arn}"
   port              = "80"
   protocol          = "HTTP"
+
+  default_action {
+    target_group_arn = "${aws_lb_target_group.ggz_api.arn}"
+    type             = "forward"
+  }
+}
+
+resource "aws_lb_listener" "front_end_https" {
+  load_balancer_arn = "${aws_lb.ggz_api.arn}"
+  port              = "443"
+  protocol          = "HTTPS"
+  certificate_arn   = "${aws_acm_certificate.app_ggz.arn}"
+  ssl_policy        = "ELBSecurityPolicy-2015-05"
 
   default_action {
     target_group_arn = "${aws_lb_target_group.ggz_api.arn}"

@@ -1,4 +1,4 @@
-resource "aws_acm_certificate" "cert" {
+resource "aws_acm_certificate" "app_ggz" {
   domain_name       = "app.ggz.tw"
   validation_method = "DNS"
 
