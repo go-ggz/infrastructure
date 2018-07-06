@@ -28,3 +28,13 @@ variable "amis" {
     ap-southeast-1 = "ami-81cefcfd"
   }
 }
+
+variable "instance_text" {
+  description = "The text the EC2 Instance should return when it gets an HTTP request."
+  default     = "Hello, World!"
+}
+
+variable "instance_port" {
+  description = "The port the EC2 Instance should listen on for HTTP requests."
+  default     = 8080
+}

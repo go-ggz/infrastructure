@@ -29,8 +29,8 @@ resource "aws_lb_target_group" "ggz_api" {
   target_type = "instance"
 
   health_check = {
-    interval = 40
-    path     = "/healthy"
+    interval = 10
+    path     = "/"
     matcher  = "200-299"
   }
 
@@ -43,7 +43,7 @@ resource "aws_lb_target_group" "ggz_api" {
 resource "aws_lb_target_group_attachment" "ggz_api" {
   target_group_arn = "${aws_lb_target_group.ggz_api.arn}"
   target_id        = "${aws_instance.ggz.id}"
-  port             = 80
+  port             = 8080
 }
 
 resource "aws_lb_listener" "front_end_http" {
