@@ -8,6 +8,10 @@ output "ggz_instance_id" {
   value       = "${ aws_instance.ggz.id }"
 }
 
+output "ggz_instance_url" {
+  value = "http://${aws_lb.ggz_api.dns_name}"
+}
+
 output "ggz_alb_sg_id" {
   description = "The ID of the alb security group"
   value       = "${ aws_security_group.ggz_alb_sg.id }"
