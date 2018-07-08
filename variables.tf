@@ -38,3 +38,8 @@ variable "instance_port" {
   description = "The port the EC2 Instance should listen on for HTTP requests."
   default     = 8080
 }
+
+variable "instance_type" {
+  description = "EC2 Instance Type."
+  default     = "t2.nano"
+}

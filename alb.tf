@@ -30,7 +30,7 @@ resource "aws_lb_target_group" "ggz_api" {
 
   health_check = {
     interval = 10
-    path     = "/"
+    path     = "/healthz"
     matcher  = "200-299"
   }
 
