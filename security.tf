@@ -1,7 +1,7 @@
 resource "aws_security_group" "ggz_alb_sg" {
   name        = "ggz alb sg"
   description = "ggz load balancer security group"
-  vpc_id      = "${data.aws_vpc.default.id}"
+  vpc_id      = "${aws_vpc.ggz.id}"
 
   egress {
     from_port   = 0
@@ -19,7 +19,7 @@ resource "aws_security_group" "ggz_alb_sg" {
 resource "aws_security_group" "ggz_api_sg" {
   name        = "ggz api sg"
   description = "ggz api service security group"
-  vpc_id      = "${data.aws_vpc.default.id}"
+  vpc_id      = "${aws_vpc.ggz.id}"
 
   egress {
     from_port   = 0

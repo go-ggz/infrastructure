@@ -1,15 +1,18 @@
-variable "aws_access_key" {}
-variable "aws_secret_key" {}
+variable "aws_access_key" {
+  description = "aws access key."
+}
 
-variable "aws_subnet_id_a" {}
-variable "aws_subnet_id_c" {}
+variable "aws_secret_key" {
+  description = "aws secret key."
+}
 
 variable "key_name" {
   description = "Name of the SSH keypair to use in AWS."
 }
 
 variable "aws_region" {
-  default = "ap-southeast-1"
+  description = "AWS region to launch servers."
+  default     = "ap-southeast-1"
 }
 
 variable "environment" {
