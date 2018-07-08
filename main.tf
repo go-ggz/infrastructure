@@ -3,3 +3,10 @@ provider "aws" {
   secret_key = "${var.aws_secret_key}"
   region     = "${var.aws_region}"
 }
+
+#############################################################
+# Data sources to get VPC and default security group details
+#############################################################
+data "aws_vpc" "default" {
+  default = true
+}
