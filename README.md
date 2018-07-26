@@ -17,7 +17,7 @@ create `terraform.tfvars` and add the following setting:
 ```
 aws_access_key  = "xxxx"
 aws_secret_key  = "xxxx"
-key_name = "xxxxx"
+ssh_public_key = "ssh-rsa xxxx appleboy@mac"
 ```
 
 ## Build Infrastructure

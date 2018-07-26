@@ -6,10 +6,6 @@ variable "aws_secret_key" {
   description = "aws secret key."
 }
 
-variable "key_name" {
-  description = "Name of the SSH keypair to use in AWS."
-}
-
 variable "aws_region" {
   description = "AWS region to launch servers."
   default     = "ap-southeast-1"
@@ -43,4 +39,8 @@ variable "instance_port" {
 variable "instance_type" {
   description = "EC2 Instance Type."
   default     = "t2.nano"
+}
+
+variable "ssh_public_key" {
+  description = "The public key material. SSH public key file format as specified in RFC4716"
 }
