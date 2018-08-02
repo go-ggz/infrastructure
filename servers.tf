@@ -1,8 +1,3 @@
-resource "aws_key_pair" "ggz" {
-  key_name_prefix = "ggz"
-  public_key      = "${var.ssh_public_key}"
-}
-
 resource "aws_instance" "ggz" {
   ami                    = "${lookup(var.amis, var.aws_region)}"
   availability_zone      = "${data.aws_availability_zone.ggz.name}"
