@@ -44,3 +44,8 @@ variable "instance_type" {
 variable "ssh_public_key" {
   description = "The public key material. SSH public key file format as specified in RFC4716"
 }
+
+variable "project" {
+  description = "default project name"
+  default     = "ggz"
+}
