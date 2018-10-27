@@ -36,3 +36,42 @@ resource "aws_api_gateway_base_path_mapping" "demo" {
   stage_name  = "${aws_api_gateway_deployment.demo.stage_name}"
   domain_name = "${aws_api_gateway_domain_name.demo.domain_name}"
 }
+
+resource "aws_api_gateway_domain_name" "app" {
+  domain_name              = "app.dev.ggz.tw"
+  regional_certificate_arn = "${aws_acm_certificate.app_cert.arn}"
+
+  endpoint_configuration {
+    types = ["REGIONAL"]
+  }
+}
+
+# Route53 is not specifically required; any DNS host can be used.
+resource "aws_route53_record" "app" {
+  zone_id = "${aws_route53_zone.dev.id}" # See aws_route53_zone for how to create this
+
+  name = "${aws_api_gateway_domain_name.app.domain_name}"
+  type = "A"
+
+  alias {
+    name                   = "${aws_api_gateway_domain_name.app.regional_domain_name}"
+    zone_id                = "${aws_api_gateway_domain_name.app.regional_zone_id}"
+    evaluate_target_health = true
+  }
+}
+
+data "aws_api_gateway_rest_api" "app" {
+  name = "app"
+}
+
+resource "aws_api_gateway_deployment" "app" {
+  # See aws_api_gateway_rest_api_docs for how to create this
+  rest_api_id = "${data.aws_api_gateway_rest_api.app.id}"
+  stage_name  = "production"
+}
+
+resource "aws_api_gateway_base_path_mapping" "app" {
+  api_id      = "${data.aws_api_gateway_rest_api.app.id}"
+  stage_name  = "${aws_api_gateway_deployment.app.stage_name}"
+  domain_name = "${aws_api_gateway_domain_name.app.domain_name}"
+}
